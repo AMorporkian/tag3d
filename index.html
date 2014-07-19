@@ -4,8 +4,8 @@
 		<style>
 			#container {
 				background: #000;
-				width: 1024px;
-				height: 768px;
+				width: 1280px;
+				height: 1024px;
 			}
 		</style>
 <script src="js/stats.js"></script>
@@ -13,11 +13,30 @@
 <body>
 	<div id="container"></div>
 </body>
-<script src="js/Box2dWeb-2.1.a.3.js"></script>
+<script src="js/Box2dWeb-2.1.a.3.min.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/three.min.js"></script>
 <script src="js/threex.keyboardstate.js"></script>
 <script src="js/jsface.js"></script>
+<script type="application/x-glsl" id="sky-vertex">
+varying vec2 vUV;
+
+void main() {
+  vUV = uv;
+  vec4 pos = vec4(position, 1.0);
+  gl_Position = projectionMatrix * modelViewMatrix * pos;
+}
+</script>
+
+<script type="application/x-glsl" id="sky-fragment">
+uniform sampler2D texture;
+varying vec2 vUV;
+
+void main() {
+  vec4 sample = texture2D(texture, vUV);
+  gl_FragColor = vec4(sample.xyz, sample.w);
+}
+</script>
 <script src="js/game.js"></script>
 
 </html>
