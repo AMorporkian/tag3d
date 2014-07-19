@@ -4,11 +4,11 @@ var WIDTH = 1024,
 
 var $container = $('#container');
 
-var debugLevelData = [[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,0,0,0,0],[0,0,0,1,1,2,2,2,2,2,2,1,1,2,2,7,2,2,2,2,2,2,2,2,2,7,2,2,1,1,2,2,2,2,2,2,1,1,0,0,0],[0,1,1,1,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,6.3,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,1,1,1,0],[1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,1,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,5,2,2,1,7,2,2,7,7,2,7,7,7,2,7,7,7,7,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,1,1,1,2,1,1,1,2,2,1,1,1,2,2,2,2,7,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,6.1,2,2,2,2,7,1],[1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,3,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,5,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,5,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,8,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,8,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,7,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,5,2,2,2,5,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,1,1,9.1,9.1,9.1,1,1,1,1,1,2,2,2,2,2,2,2,5,5,2,5,5,2,2,2,2,2,2,2,1,1,1,1,1,9.1,9.1,9.1,1,1,1],[1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,6.1,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,6.2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,2,2,6.3,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],[1,1,1,9.1,9.1,9.1,1,1,1,1,1,2,2,2,2,2,2,2,5,5,2,5,5,2,2,2,2,2,2,2,1,1,1,1,1,9.1,9.1,9.1,1,1,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,5,2,2,2,5,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,7,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,8,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,8,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,5,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,5,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,4,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,7,2,2,2,2,6.1,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,7,2,2,2,2,1,1,1,2,2,1,1,1,2,1,1,1,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,1,2,7,7,7,7,2,7,7,7,2,7,7,2,2,7,1,2,2,5,2,2,2,2,2,2,2,2,1],[1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,1,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1],[0,1,1,1,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,6.3,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,1,1,1,0],[0,0,0,1,1,2,2,2,2,2,2,1,1,2,2,7,2,2,2,2,2,2,2,2,2,7,2,2,1,1,2,2,2,2,2,2,1,1,0,0,0],[0,0,0,0,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0]];
-
+var debugLevelData = [[0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0],[0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,9,9,2,2,2,2,6.3,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,1,2,2,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,2,1,2,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,5,2,1,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,2,2,2,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,2,2,2,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,8,2,1,1,2,2,2,2,2,2,2,1,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,1],[0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,1],[0,1,0,0,0,0,0,1,2,2,8,2,2,2,2,2,2,2,2,2,2,5,2,1,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,1,2,2,2,7,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,1,2,2,2,7,7,7,2,2,2,2,2,2,6.2,2,2,2,2,7,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,1,2,2,2,7,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,9,9,9,1,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,2,1],[1,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,1],[0,1,0,0,0,0,0,1,2,2,8,2,2,2,2,2,2,2,2,2,2,5,2,1,2,2,2,1],[0,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,1],[0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,8,2,1,1,2,2,2,2,2,2,2,1,0],[0,0,0,0,0,1,2,2,2,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,2,2,2,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,2,2,2,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,5,2,1,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,2,1,2,2,1,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,9,9,2,1,2,2,2,1,0,0,0],[0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,9,9,2,2,2,2,6.1,1,0,0,0],[0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0]]
 var xOffset = 0,
 	yOffset = 0,
 	zOffset = 200;
+
 var b2Vec2 = Box2D.Common.Math.b2Vec2;
 var b2BodyDef = Box2D.Dynamics.b2BodyDef;
 var b2Body = Box2D.Dynamics.b2Body;
@@ -30,9 +30,9 @@ var floorMaterial = new THREE.MeshLambertMaterial({
 	map: THREE.ImageUtils.loadTexture('img/floor.png')
 });
 var wallMaterial = new THREE.MeshPhongMaterial({
-	map: THREE.ImageUtils.loadTexture('img/stonebump.png'),
+	map: THREE.ImageUtils.loadTexture('img/wall.png'),
 	bumpMap: THREE.ImageUtils.loadTexture('img/stonebump.png'),
-	bumpScale: 10
+	bumpScale: 5
 });
 var redFlagMaterial = new THREE.MeshLambertMaterial({
 	map: THREE.ImageUtils.loadTexture('img/redflag.png'),
@@ -59,14 +59,25 @@ var spikeMaterial = new THREE.MeshLambertMaterial({
 	map: THREE.ImageUtils.loadTexture('img/spike.png'),
 	transparent: true,
 });
-var greenTileMaterial = new THREE.MeshLambertMaterial({
-	color: 'green',
-	opacity: .5
+var greenTileMaterial = new THREE.MeshPhongMaterial({
+	color: 0x00FF00,
+	map: THREE.ImageUtils.loadTexture('img/gatemap.png'),
+	bumpMap: THREE.ImageUtils.loadTexture('img/gate.png'),
+	transparent: true,
+	opacity: .8
 });
+var bombMaterial = new THREE.MeshPhongMaterial({
+	color: 'black'
+
+});
+
+var sign = function(x) {
+			return x > 0 ? 1 : x < 0 ? -1 : 0;
+		}
 camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 200;
-perspectiveCamera = new THREE.PerspectiveCamera(90, WIDTH / HEIGHT, 40, -40)
+perspectiveCamera = new THREE.PerspectiveCamera(80, WIDTH / HEIGHT, 40, -40)
 perspectiveCamera.position.x = 100;
 perspectiveCamera.position.y = 0;
 perspectiveCamera.position.z = 200;
@@ -74,12 +85,14 @@ perspectiveCamera.position.z = 200;
 // start the renderer
 renderer.setSize(WIDTH, HEIGHT);
 
+var worldScale = 100;
 // attach the render-supplied DOM element
 $container.append(renderer.domElement);
 
 // create the sphere's material
 
 scene.add(camera);
+
 var activeCamera = camera;
 
 var spotLight = new THREE.SpotLight(0xFFFFFF);
@@ -90,6 +103,10 @@ spotLight.position.z = 10000;
 
 scene.add(spotLight);
 var keyboard = new THREEx.KeyboardState();
+
+var world = new b2World(new b2Vec2(0, 0), true);
+
+var cameraLastChanged = 0;
 
 var Renderable = Class({
 	constructor: function(x, y) {
@@ -108,6 +125,8 @@ var Ball = Class(Renderable, {
 		this.z = this.z + this.radius;
 		this.segments = 32;
 		this.rings = 32;
+		this.maxSpeed = 2.5;
+		this.acceleration = .025;
 		if (color == "blue") {
 			this.material = new THREE.MeshPhongMaterial({
 				color: 'blue'
@@ -120,10 +139,44 @@ var Ball = Class(Renderable, {
 		this.sphere = new THREE.Mesh(new THREE.SphereGeometry(this.radius, this.segments, this.rings), this.material);
 		this.color = color;
 		scene.add(this.sphere);
+		this.setupPhysics()
 	},
 	update: function() {
-		this.sphere.position.x = this.x;
-		this.sphere.position.y = this.y;
+
+		var currentVelocity = this.body.GetLinearVelocity()
+		var currentPosition = this.body.GetPosition()
+		var currentAngle = this.body.GetAngle()
+		var newVelocity = new b2Vec2(currentVelocity.x, currentVelocity.y)
+		if (keyboard.pressed("w") || keyboard.pressed("up")) {
+			newVelocity.y += this.acceleration;
+		}
+		if (keyboard.pressed("a") || keyboard.pressed("left")) {
+			newVelocity.x -= this.acceleration;
+		}
+		if (keyboard.pressed("s") || keyboard.pressed("down")) {
+			newVelocity.y -= this.acceleration;
+		}
+		if (keyboard.pressed("d") || keyboard.pressed("right")) {
+			newVelocity.x += this.acceleration;
+		}
+		if (Math.abs(newVelocity.x) > this.maxSpeed) {
+			newVelocity.x = sign(newVelocity.x) * this.maxSpeed;
+		}
+		if (Math.abs(newVelocity.y) > this.maxSpeed) {
+			newVelocity.y = sign(currentVelocity.y) * this.maxSpeed;
+		}
+
+		this.body.SetPosition(currentPosition);
+		this.body.SetLinearVelocity(newVelocity);
+		//this.body.SetAngle(currentAngle);
+
+
+		this.sphere.position.x = currentPosition.x * worldScale;
+		this.sphere.position.y = currentPosition.y * worldScale;
+
+		this.x = currentPosition.x * worldScale
+		this.y = currentPosition.y * worldScale
+
 		if (this.follow) {
 			camera.left = this.x + (WIDTH / -2);
 			camera.right = this.x + (WIDTH / 2);
@@ -131,12 +184,31 @@ var Ball = Class(Renderable, {
 			camera.bottom = this.y + (HEIGHT / -2);
 
 			perspectiveCamera.lookAt(new THREE.Vector3(this.x, this.y, 0));
-			perspectiveCamera.position.y = yOffset;
-			perspectiveCamera.position.x = xOffset;
-			perspectiveCamera.position.z = zOffset;
+			perspectiveCamera.position.y = this.y - this.radius * 8;
+			perspectiveCamera.position.x = this.x;
+			perspectiveCamera.position.z = this.z + this.radius * 8;
 			camera.updateProjectionMatrix();
 			perspectiveCamera.updateProjectionMatrix();
 		}
+	},
+	setupPhysics: function() {
+		this.bodyDef = new b2BodyDef;
+		this.bodyDef.type = b2Body.b2_dynamicBody;
+		this.bodyDef.position.Set(this.x / worldScale, this.y / worldScale);
+		this.bodyDef.linearDamping = .5;
+		this.bodyDef.angularDamping = .5;
+
+		this.shape = new b2CircleShape;
+		this.shape.SetRadius(this.radius / worldScale);
+
+		this.fixtureDef = new b2FixtureDef;
+		this.fixtureDef.density = 1.0;
+		this.fixtureDef.friction = .5
+		this.fixtureDef.restitution = .2
+
+		this.fixtureDef.shape = this.shape
+		this.body = world.CreateBody(this.bodyDef)
+		this.body.CreateFixture(this.fixtureDef)
 	}
 });
 
@@ -173,6 +245,27 @@ var Wall = Class(Renderable, {
 		this.box.position.x = this.x;
 		this.box.position.y = this.y;
 		this.box.position.z = 0;
+		this.setupPhysics();
+	},
+	setupPhysics: function() {
+		var bodyDef = new b2BodyDef;
+		bodyDef.type = b2Body.b2_staticBody;
+		bodyDef.position.Set(this.x / worldScale, this.y / worldScale);
+
+		var square = new b2PolygonShape;
+		square.SetAsBox(this.radius / 2 / worldScale, this.radius / 2 / worldScale);
+
+		var fixtureDef = new b2FixtureDef;
+		fixtureDef.density = 1
+		fixtureDef.friction = .5
+		fixtureDef.restitution = .2
+		fixtureDef.shape = square
+
+		this.body = world.CreateBody(bodyDef);
+		this.body.CreateFixture(fixtureDef);
+		this.body.SetLinearDamping(.5);
+		this.body.Set
+
 	}
 });
 
@@ -253,6 +346,30 @@ var Spike = Class(Stacked, {
 		scene.add(this.box);
 	}
 })
+var GreenGate = Class(Stacked, {
+	constructor: function(x, y) {
+		Stacked.call(this, x, y);
+		this.material = greenTileMaterial;
+		this.box = new THREE.Mesh(new THREE.BoxGeometry(this.radius, this.radius, this.radius), this.material);
+		this.box.position.x = this.x;
+		this.box.position.y = this.y;
+		this.box.position.z = 0;
+		scene.add(this.box);
+	}
+});
+var Bomb = Class(Stacked, {
+	constructor: function(x, y) {
+		Stacked.call(this, x, y);
+		this.radius = 18;
+		this.material = bombMaterial;
+		this.box = new THREE.Mesh(new THREE.SphereGeometry(this.radius, 32, 32), this.material);
+		this.box.position.x = this.x;
+		this.box.position.y = this.y;
+		this.box.position.z = 0;
+		scene.add(this.box);
+	}
+});
+
 var Level = Class({
 	constructor: function(levelData) {
 		this.tiles = []
@@ -278,6 +395,9 @@ var Level = Class({
 					case 5:
 						tileColumn.push(new Speedpad(i * 40, -j * 40));
 						break;
+					case 6.2:
+						tileColumn.push(new Bomb(i * 40, -j * 40));
+						break;
 					case 7:
 						tileColumn.push(new Spike(i * 40, -j * 40));
 						break;
@@ -286,6 +406,9 @@ var Level = Class({
 						break;
 					case 9:
 						tileColumn.push(new TeamTile(i * 40, -j * 40, "red"));
+						break;
+					case 9.1:
+						tileColumn.push(new GreenGate(i * 40, -j * 40));
 						break;
 					default:
 						tileColumn.push(new Floor(i * 40, -j * 40));
@@ -304,12 +427,10 @@ var Level = Class({
 	}
 })
 
-var ball = new Ball(0, 0, "blue", true);
+var ball = new Ball(300, -300, "blue", true);
 var level = new Level(debugLevelData);
 var controlLoop = function() {
 	ball.update();
-
-	//floor.update();
 	if (keyboard.pressed("r")) {
 		zOffset += 5;
 	}
@@ -330,29 +451,22 @@ var controlLoop = function() {
 	}
 
 	if (keyboard.pressed("c")) {
-		if (activeCamera === perspectiveCamera) {
-			scene.remove(perspectiveCamera);
-			scene.add(camera);
-			activeCamera = camera;
-		} else {
-			scene.remove(camera);
-			scene.add(perspectiveCamera);
-			activeCamera = perspectiveCamera;
+		var d = new Date()
+		var now = d.getTime()
+		if (now - cameraLastChanged > 500) {
+			cameraLastChanged = now;
+			if (activeCamera === perspectiveCamera) {
+				scene.remove(perspectiveCamera);
+				scene.add(camera);
+				activeCamera = camera;
+			} else {
+				scene.remove(camera);
+				scene.add(perspectiveCamera);
+				activeCamera = perspectiveCamera;
+			}
 		}
 	}
-	
-	if (keyboard.pressed("w") || keyboard.pressed("up")) {
-		ball.y += 3;
-	}
-	if (keyboard.pressed("a") || keyboard.pressed("left")) {
-		ball.x -= 3;
-	}
-	if (keyboard.pressed("s") || keyboard.pressed("down")) {
-		ball.y -= 3;
-	}
-	if (keyboard.pressed("d") || keyboard.pressed("right")) {
-		ball.x += 3;
-	}
+
 
 }
 
@@ -362,6 +476,7 @@ var renderLoop = function() {
 }
 var mainLoop = function() {
 	controlLoop();
+	world.Step(1 / 60., 8, 3)
 	renderLoop();
 }
 var stats = new Stats();
@@ -369,7 +484,7 @@ stats.setMode(1); // 0: fps, 1: ms
 
 // Align top-left
 stats.domElement.style.position = 'absolute';
-stats.domElement.style.left = '1200px';
+stats.domElement.style.left = '1024px';
 stats.domElement.style.top = '0px';
 
 document.body.appendChild(stats.domElement);
