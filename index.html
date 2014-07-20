@@ -17,7 +17,6 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/three.min.js"></script>
 <script src="js/threex.keyboardstate.js"></script>
-<script src="js/shaderparticles.min.js"></script>
 <script src="js/jsface.js"></script>
 <script type="application/x-glsl" id="sky-vertex">
 varying vec2 vUV;
@@ -38,6 +37,7 @@ void main() {
   gl_FragColor = vec4(sample.xyz, sample.w);
 }
 </script>
+<script src="js/require.js"></script>
 <script src="js/game.js"></script>
 
 </html>

@@ -12,13 +12,13 @@ var spikeGeometry;
 var boostGeometry;
 var flagGeometry;
 loader = new THREE.JSONLoader();
-loader.load("js/spikeyball.js", function(geometry) {
+loader.load("models/spikeyball.js", function(geometry) {
 	spikeGeometry = geometry;
 });
-loader.load("js/boost.js", function(geometry) {
+loader.load("models/boost.js", function(geometry) {
 	boostGeometry = geometry;
 })
-loader.load("js/flag.js", function(geometry) {
+loader.load("models/flag.js", function(geometry) {
 	flagGeometry = geometry;
 })
 var b2Vec2 = Box2D.Common.Math.b2Vec2;
@@ -625,9 +625,10 @@ var controlLoop = function() {
 
 var lastStepped;
 var renderLoop = function() {
-
+	stats.begin();
 	requestAnimationFrame(renderLoop);
 	renderer.render(scene, activeCamera);
+	stats.end();
 }
 var mainLoop = function() {
 	if (spikeGeometry) {
@@ -642,7 +643,7 @@ var mainLoop = function() {
 	}
 }
 var stats = new Stats();
-stats.setMode(1); // 0: fps, 1: ms
+stats.setMode(0); // 0: fps, 1: ms
 
 // Align top-left
 stats.domElement.style.position = 'absolute';
