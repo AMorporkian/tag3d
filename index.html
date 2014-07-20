@@ -8,16 +8,11 @@
 				height: 720px;
 			}
 		</style>
-<script src="js/stats.js"></script>
+<script src="js/require.js" data-main="js/main"></script>
 </head>
 <body>
 	<div id="container"></div>
 </body>
-<script src="js/Box2dWeb-2.1.a.3.min.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/three.min.js"></script>
-<script src="js/threex.keyboardstate.js"></script>
-<script src="js/jsface.js"></script>
 <script type="application/x-glsl" id="sky-vertex">
 varying vec2 vUV;
 
@@ -37,7 +32,4 @@ void main() {
   gl_FragColor = vec4(sample.xyz, sample.w);
 }
 </script>
-<script src="js/require.js"></script>
-<script src="js/game.js"></script>
-
 </html>
