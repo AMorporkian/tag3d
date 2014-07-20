@@ -1,70 +1,26 @@
 // set the scene size
 var WIDTH = 1280,
-	HEIGHT = 1024;
+	HEIGHT = 720;
 
 var $container = $('#container');
 
-var debugLevelData = [
-	[0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 1, 1, 2, 2, 2, 10, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 10, 2, 6.2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 7, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 7, 2, 8, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 7, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 7, 7, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 1, 7, 7, 7, 1, 2, 2, 2, 1, 1, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 1, 1, 1, 1, 9, 9, 9, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 9.1, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 7, 2, 2, 2, 2, 10, 7, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 8, 2, 2, 2, 7, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 10, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 9.1, 9.1, 9.1, 9.1, 9.1, 9.1, 9.1, 9.1, 9.1, 9.1, 1, 7, 7, 7, 7, 6.2, 7, 1, 1, 1, 1, 1, 1, 2, 2, 2, 6.2, 2, 2, 7, 1],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 10, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 8, 2, 2, 2, 7, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 7, 2, 2, 2, 2, 10, 7, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-	[0, 0, 0, 0, 0, 1, 2, 2, 2, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 1, 9, 9, 9, 1, 0, 0, 9.1, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 1, 1, 1, 1, 9, 9, 9, 1, 0, 0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 5, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 1, 7, 7, 7, 1, 2, 2, 2, 1, 1, 0, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 7, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 7, 7, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 7, 2, 8, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 7, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 10, 2, 6.2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 1, 1, 2, 2, 2, 10, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-];
+var debugLevelData = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,8,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,7,7,7,7,7,7,1,1,1,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,1,1,2,2,2,2,2,1,9,9,9,9,9,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,2,2,2,7,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,1,1,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,3,2,2,2,2,2,2,2,2,2,2,2,5,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,1,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,7,7,7,7,7,2,2,2,2,2,2,7,2,2,2,2,2,2,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,0,0,0,0,0,0,1,7,7,2,2,2,2,2,2,2,2,2,2,7,0,0,0,0,0,1,1,2,2,6.2,2,2,6.3,1],[1,1,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,1,7,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,2,1],[1,1,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,7,2,2,2,2,7,2,2,2,2,2,1,1,1,1,2,2,2,2,2,2,2,1],[1,1,6.2,2,2,1,1,1,2,2,2,2,2,2,5,2,2,2,2,2,2,6.1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,6.3,1],[1,1,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,7,2,2,2,2,7,2,2,2,2,2,1,1,1,1,2,2,2,2,2,2,2,1],[1,1,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,1,7,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,2,1],[1,1,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,0,0,0,0,0,0,1,7,7,2,2,2,2,2,2,2,2,2,2,7,0,0,0,0,0,1,1,2,2,6.2,2,2,6.1,1],[1,1,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,7,7,7,7,7,2,2,2,2,2,2,7,2,2,2,2,2,2,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,2,2,2,2,2,2,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1],[1,1,1,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,4,2,2,2,2,2,2,2,2,2,2,2,5,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,7,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,2,2,2,2,2,2,1,1,1,2,2,2,2,2,2,7,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,1,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,2,2,2,7,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,2,2,2,2,2,2,2,1,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,1,1,1,2,2,2,2,2,1,9,9,9,9,9,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,7,7,7,7,7,7,1,1,1,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,8,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2,2,2,2,2,2,2,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]
 var xOffset = 0,
 	yOffset = 0,
 	zOffset = 200;
-
+var spikeGeometry;
+var boostGeometry;
+var flagGeometry;
+loader = new THREE.JSONLoader();
+loader.load("js/spikeyball.js", function(geometry) {
+	spikeGeometry = geometry;
+});
+loader.load("js/boost.js", function(geometry) {
+	boostGeometry = geometry;
+})
+loader.load("js/flag.js", function(geometry) {
+	flagGeometry = geometry;
+})
 var b2Vec2 = Box2D.Common.Math.b2Vec2;
 var b2BodyDef = Box2D.Dynamics.b2BodyDef;
 var b2Body = Box2D.Dynamics.b2Body;
@@ -75,21 +31,7 @@ var b2MassData = Box2D.Collision.Shapes.b2MassData;
 var b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
 var b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
 var b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
-Box2D.Common.b2Settings.VERSION = "2.1alpha"
-Box2D.Common.b2Settings.USHRT_MAX = 65535
-Box2D.Common.b2Settings.b2_pi = Math.PI
-Box2D.Common.b2Settings.b2_maxManifoldPoints = 2
-Box2D.Common.b2Settings.b2_aabbExtension = .1
-Box2D.Common.b2Settings.b2_aabbMultiplier = 2
-Box2D.Common.b2Settings.b2_linearSlop = .005
-Box2D.Common.b2Settings.b2_maxTOIContactsPerIsland = 32
-Box2D.Common.b2Settings.b2_maxTOIJointsPerIsland = 32
-Box2D.Common.b2Settings.b2_velocityThreshold = 1
-Box2D.Common.b2Settings.b2_maxLinearCorrection = .2
-Box2D.Common.b2Settings.b2_maxTranslation = 2
-Box2D.Common.b2Settings.b2_contactBaumgarte = .2
-Box2D.Common.b2Settings.b2_timeToSleep = .5
-Box2D.Common.b2Settings.b2_linearSleepTolerance = .01
+
 var renderer = new THREE.WebGLRenderer({
 	antialias: true
 });
@@ -107,13 +49,17 @@ var wallMaterial = new THREE.MeshPhongMaterial({
 	shininess: 80
 });
 var redFlagMaterial = new THREE.MeshLambertMaterial({
-	map: THREE.ImageUtils.loadTexture('img/redflag.png'),
-	transparent: true,
+	color: "red",
+	side: THREE.DoubleSide
+	//map: THREE.ImageUtils.loadTexture('img/redflag.png'),
+	//transparent: true,
 	//opacity: 0.99
 });
 var blueFlagMaterial = new THREE.MeshLambertMaterial({
-	map: THREE.ImageUtils.loadTexture('img/blueflag.png'),
-	transparent: true,
+	color: "blue",
+	side: THREE.DoubleSide
+	//map: THREE.ImageUtils.loadTexture('img/blueflag.png'),
+	//transparent: true,
 	//opacity: 0.99
 });
 var neutralTeamTileMaterial = new THREE.MeshLambertMaterial({
@@ -124,8 +70,9 @@ var buttonMaterial = new THREE.MeshLambertMaterial({
 	//transparent: true,
 });
 var speedpadMaterial = new THREE.MeshLambertMaterial({
-	map: THREE.ImageUtils.loadTexture('img/speedpad.png'),
-	transparent: true,
+	color: 'orange',
+	//map: THREE.ImageUtils.loadTexture('img/speedpad.png'),
+	//transparent: true,
 });
 var spikeMaterial = new THREE.MeshLambertMaterial({
 	map: THREE.ImageUtils.loadTexture('img/spike.png'),
@@ -134,7 +81,10 @@ var spikeMaterial = new THREE.MeshLambertMaterial({
 var greenTileMaterial = new THREE.MeshPhongMaterial({
 	color: 0x00FF00,
 	map: THREE.ImageUtils.loadTexture('img/gatemap.png'),
+	size: .1,
+	specular: "green",
 	bumpMap: THREE.ImageUtils.loadTexture('img/gate.png'),
+	specularMap: THREE.ImageUtils.loadTexture('img/gatemap.png'),
 	transparent: true,
 	opacity: .8
 });
@@ -144,13 +94,25 @@ var bombMaterial = new THREE.MeshPhongMaterial({
 });
 var powerupMaterial = new THREE.MeshPhongMaterial({
 	color: 'green',
-	transparent: true,
-	opacity: .5,
 	map: THREE.ImageUtils.loadTexture('img/gatemap.png'),
 	bumpMap: THREE.ImageUtils.loadTexture('img/gate.png'),
-	shininess: .95
+	specularMap: THREE.ImageUtils.loadTexture('img/gatemap.png'),
+	specular: "white",
+	shininess: .5,
+	transparent: true,
+	opacity: .5
 
 });
+var metalMaterial = new THREE.MeshPhongMaterial({
+	map: THREE.ImageUtils.loadTexture('img/metal10.png'),
+	normalMap: THREE.ImageUtils.loadTexture('img/metal10nm.png'),
+	specularMap: THREE.ImageUtils.loadTexture('img/metal10nm.png'),
+	specular: 'grey',
+	shading: THREE.FlatShading,
+	metal: true,
+	//color: "black",
+});
+
 var sign = function(x) {
 	return x > 0 ? 1 : x < 0 ? -1 : 0;
 }
@@ -164,6 +126,8 @@ perspectiveCamera.position.z = 200;
 
 // start the renderer
 renderer.setSize(WIDTH, HEIGHT);
+renderer.shadowMapEnabled = true;
+renderer.shadowMapSoft = true;
 
 var worldScale = 100;
 // attach the render-supplied DOM element
@@ -174,20 +138,22 @@ scene.add(camera);
 
 var activeCamera = camera;
 
-var ambientLight = new THREE.AmbientLight(0x0C0C0C);
-var spotLight = new THREE.SpotLight(0xCCCCCC, .6);
-spotLight.castShadow = true;
-spotLight.position.x = 000;
-spotLight.position.y = 000;
-spotLight.position.z = 7500;
-var spotLight2 = new THREE.SpotLight(0xCCCCCC, .6);
-spotLight2.position.x = 0;
-spotLight2.position.y = -800;
-spotLight2.position.z = 25000;
+//var ambientLight = new THREE.AmbientLight(0x0C0C0C);
+var spotlight = new THREE.DirectionalLight(0xFFFFFF, 1);
+spotlight.position.set(200, 200, 800);
+spotlight.castShadow = true;
+spotlight.shadowMapWidth = 1024;
+spotlight.shadowMapHeight = 1024;
+//spotlight.shadowCameraNear = 50;
+//spotlight.shadowCameraFar = 4096;
+//spotlight.shadowCameraRight = 4096;
+//spotlight.shadowCameraLeft = -500;
+//spotlight.shadowCameraTop = 500;
+//spotlight.shadowCameraBottom = -4096;
 
-scene.add(ambientLight);
-scene.add(spotLight);
-scene.add(spotLight2)
+//scene.add(ambientLight);
+scene.add(spotlight);
+
 var keyboard = new THREEx.KeyboardState();
 
 var world = new b2World(new b2Vec2(0, 0), true);
@@ -196,17 +162,20 @@ var cameraLastChanged = 0;
 
 var geometry = new THREE.SphereGeometry(3000, 60, 40);
 var uniforms = {
-  texture: { type: 't', value: THREE.ImageUtils.loadTexture('img/skydome.png') }
+	texture: {
+		type: 't',
+		value: THREE.ImageUtils.loadTexture('img/skydome.png')
+	}
 };
 
-var material = new THREE.ShaderMaterial( {
-  uniforms:       uniforms,
-  vertexShader:   document.getElementById('sky-vertex').textContent,
-  fragmentShader: document.getElementById('sky-fragment').textContent
+var material = new THREE.ShaderMaterial({
+	uniforms: uniforms,
+	vertexShader: document.getElementById('sky-vertex').textContent,
+	fragmentShader: document.getElementById('sky-fragment').textContent
 });
 
 skyBox = new THREE.Mesh(geometry, material);
-skyBox.scale.set(-1, 1, 1);
+skyBox.scale.set(-5, 5, 5);
 skyBox.eulerOrder = 'XZY';
 skyBox.renderDepth = 1000.0;
 scene.add(skyBox);
@@ -245,6 +214,7 @@ var Ball = Class(Renderable, {
 			});
 		}
 		this.sphere = new THREE.Mesh(new THREE.SphereGeometry(this.radius, this.segments, this.rings), this.material);
+		this.sphere.castShadow = true;
 		this.color = color;
 		scene.add(this.sphere);
 		this.setupPhysics()
@@ -289,7 +259,7 @@ var Ball = Class(Renderable, {
 
 		this.sphere.position.x = currentPosition.x * worldScale;
 		this.sphere.position.y = currentPosition.y * worldScale;
-
+		//console.log(this.sphere.position)
 
 		this.x = currentPosition.x * worldScale
 		this.y = currentPosition.y * worldScale
@@ -300,12 +270,15 @@ var Ball = Class(Renderable, {
 			camera.top = this.y + (HEIGHT / 2);
 			camera.bottom = this.y + (HEIGHT / -2);
 
-			perspectiveCamera.lookAt(new THREE.Vector3(this.x, this.y, 0));
-			perspectiveCamera.position.y = this.y - this.radius * 8;
+			perspectiveCamera.lookAt(new THREE.Vector3(this.x, this.y, -100));
+			perspectiveCamera.position.y = this.y - this.radius * 6;
 			perspectiveCamera.position.x = this.x;
-			perspectiveCamera.position.z = this.z + this.radius * 8;
+			perspectiveCamera.position.z = this.z + this.radius * 12;
 			camera.updateProjectionMatrix();
 			perspectiveCamera.updateProjectionMatrix();
+
+			spotlight.position.set(this.x, this.y, 800)
+			spotlight.target = this.sphere;
 		}
 	},
 	setupPhysics: function() {
@@ -339,6 +312,7 @@ var Floor = Class(Renderable, {
 
 		this.radius = 40;
 		this.box = new THREE.Mesh(new THREE.BoxGeometry(this.radius, this.radius, this.radius), this.material);
+		this.box.receiveShadow = true;
 		scene.add(this.box);
 		this.box.position.x = this.x;
 		this.box.position.y = this.y;
@@ -364,6 +338,7 @@ var Wall = Class(Renderable, {
 		this.box.position.x = this.x;
 		this.box.position.y = this.y;
 		this.box.position.z = 0;
+		this.box.receiveShadow = true;
 		this.setupPhysics();
 	},
 	setupPhysics: function() {
@@ -397,7 +372,7 @@ var Button = Class(Stacked, {
 		scene.add(this.box);
 		this.box.position.x = this.x;
 		this.box.position.y = this.y
-		this.box.position.z = -20-this.radius/4;
+		this.box.position.z = -20 - this.radius / 4;
 	}
 });
 var Flag = Class(Stacked, {
@@ -410,11 +385,16 @@ var Flag = Class(Stacked, {
 			this.material = redFlagMaterial;
 		}
 		this.radius = 40;
-		this.box = new THREE.Mesh(new THREE.BoxGeometry(this.radius, this.radius, this.radius), this.material);
+		this.box = new THREE.Mesh(flagGeometry, this.material);
+		var scale = 20;
+		this.box.scale.set(scale, scale, scale)
+		this.box.rotateX(Math.PI / 2)
+		this.box.rotateY(Math.PI / 2)
+
 		scene.add(this.box);
 		this.box.position.x = this.x;
 		this.box.position.y = this.y
-		this.box.position.z = -this.radius + 1;
+		this.box.position.z = -20;
 	}
 });
 
@@ -448,10 +428,14 @@ var Speedpad = Class(Stacked, {
 	constructor: function(x, y) {
 		Stacked.call(this, x, y)
 		this.material = speedpadMaterial
-		this.box = new THREE.Mesh(new THREE.BoxGeometry(this.radius, this.radius, this.radius), this.material);
+		this.box = new THREE.Mesh(boostGeometry, this.material);
+		scale = 12;
+		this.box.scale.set(scale, scale, scale)
+		this.box.rotateX(Math.PI / 2)
 		this.box.position.x = this.x;
 		this.box.position.y = this.y;
-		this.box.position.z = -this.radius + 1;
+		this.box.position.z = -20;
+
 		scene.add(this.box);
 	}
 });
@@ -459,11 +443,22 @@ var Spike = Class(Stacked, {
 	constructor: function(x, y) {
 		Stacked.call(this, x, y)
 		this.material = spikeMaterial;
-		this.box = new THREE.Mesh(new THREE.BoxGeometry(this.radius, this.radius, this.radius), this.material);
+		this.box = new THREE.SkinnedMesh(spikeGeometry, metalMaterial, true);
+		this.box.castShadow = true;
+		var scale = 7;
+		this.box.scale.set(scale, scale, scale)
 		this.box.position.x = this.x;
 		this.box.position.y = this.y;
-		this.box.position.z = -this.radius + 1;
+		this.box.position.z = 0
+
+
+		this.fc = 0;
 		scene.add(this.box);
+	},
+	update: function() {
+		this.fc += 1;
+		this.box.rotateZ(-Math.PI / 45);
+		this.box.position.z = 10 + (5 * Math.sin((Math.PI / 60) * (120 + (this.fc % 120))));
 	}
 })
 var GreenGate = Class(Stacked, {
@@ -499,6 +494,11 @@ var Powerup = Class(Stacked, {
 		this.box.position.y = this.y;
 		this.box.position.z = 0;
 		scene.add(this.box);
+
+	},
+	update: function() {
+		this.box.rotateZ(Math.PI / 90)
+
 	}
 });
 
@@ -506,67 +506,84 @@ var Powerup = Class(Stacked, {
 var Level = Class({
 	constructor: function(levelData) {
 		this.tiles = []
+		this.updateables = [];
 		for (var i = 0; i < levelData.length; i++) {
 			var currentColumn = levelData[i];
 			var tileColumn = [];
+
 			for (var j = 0; j < currentColumn.length; j++) {
+				var tile;
+				var updateable = false;
 				switch (currentColumn[j]) {
 					case 0:
 						break;
 					case 1:
-						tileColumn.push(new Wall(i * 40, -j * 40));
+						tile = new Wall(i * 40, -j * 40);
 						break;
 					case 2:
-						tileColumn.push(new Floor(i * 40, -j * 40));
+						tile = new Floor(i * 40, -j * 40);
 						break;
 					case 3:
-						tileColumn.push(new Flag(i * 40, -j * 40, "red"));
+						tile = new Flag(i * 40, -j * 40, "red");
 						break;
 					case 4:
-						tileColumn.push(new Flag(i * 40, -j * 40, "blue"));
+						tile = new Flag(i * 40, -j * 40, "blue");
 						break;
 					case 5:
-						tileColumn.push(new Speedpad(i * 40, -j * 40));
+						tile = new Speedpad(i * 40, -j * 40);
 						break;
 					case 6.2:
-						tileColumn.push(new Powerup(i * 40, -j * 40));
+						tile = new Powerup(i * 40, -j * 40);
+						updateable = true;
+						break;
+					case 6.3:
+						tile = new Powerup(i * 40, -j * 40);
+						updateable = true;
 						break;
 					case 7:
-						tileColumn.push(new Spike(i * 40, -j * 40));
+						tile = new Spike(i * 40, -j * 40);
+						updateable = true;
 						break;
 					case 8:
-						tileColumn.push(new Button(i * 40, -j * 40));
+						tile = new Button(i * 40, -j * 40);
 						break;
 					case 9:
-						tileColumn.push(new TeamTile(i * 40, -j * 40, "red"));
+						tile = new TeamTile(i * 40, -j * 40, "red");
 						break;
 					case 9.1:
-						tileColumn.push(new GreenGate(i * 40, -j * 40));
+						tile = new GreenGate(i * 40, -j * 40);
 						break;
 					case 10:
-						tileColumn.push(new Bomb(i * 40, -j * 40));
+						tile = new Bomb(i * 40, -j * 40);
 						break;
 					default:
-						tileColumn.push(new Floor(i * 40, -j * 40));
+						tile = new Floor(i * 40, -j * 40);
 						break;
 				}
-				this.tiles.push(tileColumn);
+				if (tile) {
+					tileColumn.push(tile);
+				}
+				if (updateable) {
+					this.updateables.push(tile);
+				}
 			}
+			this.tiles.push(tileColumn);
 		}
 	},
 	update: function() {
-		for (var i = 0; i < this.tiles.length; i++) {
-			for (var j = 0; j < this.tiles.length; j++) {
-				this.tiles[i][j].update();
-			}
+		for (var i = 0; i < this.updateables.length; i++) {
+			this.updateables[i].update();
 		}
+
 	}
 })
 
-var ball = new Ball(300, -300, "red", true);
-var level = new Level(debugLevelData);
+var ball;
+var level;
+
 var controlLoop = function() {
 	ball.update();
+	level.update();
 	if (keyboard.pressed("r")) {
 		zOffset += 5;
 	}
@@ -606,14 +623,23 @@ var controlLoop = function() {
 
 }
 
-
+var lastStepped;
 var renderLoop = function() {
+
+	requestAnimationFrame(renderLoop);
 	renderer.render(scene, activeCamera);
 }
 var mainLoop = function() {
-	controlLoop();
-	world.Step(1 / 60., 8, 3)
-	renderLoop();
+	if (spikeGeometry) {
+		if (!ball) {
+			ball = new Ball(450, -1200, "red", true);
+		}
+		if (!level) {
+			level = new Level(debugLevelData);
+		}
+		controlLoop();
+		world.Step(1 / 60, 8, 3);
+	}
 }
 var stats = new Stats();
 stats.setMode(1); // 0: fps, 1: ms
@@ -627,10 +653,10 @@ document.body.appendChild(stats.domElement);
 
 setInterval(function() {
 
-	stats.begin();
 
 	mainLoop()
 
-	stats.end();
 
 }, 1000 / 60);
+
+renderLoop();
