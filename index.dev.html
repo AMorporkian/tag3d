@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Tagpro 3D</title>
+    <style>
+        body {
+            background-color: #EEEEEE;
+        }
+        #container {
+            margin: auto;
+            background: #000;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            border: 5px solid #000000;
+            width: 1280px;
+            height: 800px;
+        }
+    </style>
+    <script src="js/require.js" data-main="js/main"></script>
+</head>
+<body>
+<div id="container"></div>
+
+</body>
+<script type="application/x-glsl" id="sky-vertex">
+varying vec2 vUV;
+
+void main() {
+  vUV = uv;
+  vec4 pos = vec4(position, 1.0);
+  gl_Position = projectionMatrix * modelViewMatrix * pos;
+}
+</script>
+
+<script type="application/x-glsl" id="sky-fragment">
+uniform sampler2D texture;
+varying vec2 vUV;
+
+void main() {
+  vec4 sample = texture2D(texture, vUV);
+  gl_FragColor = vec4(sample.xyz, sample.w);
+}
+</script>
+</html>

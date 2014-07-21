@@ -5,9 +5,33 @@ define(['jquery',
     "game/materials",
     'stats'
 ], function ($, THREE, constants, jsface, materials, Stats) {
-
+    (function($) {
+        $.QueryString = (function(a) {
+            if (a == "") return {};
+            var b = {};
+            for (var i = 0; i < a.length; ++i)
+            {
+                var p=a[i].split('=');
+                if (p.length != 2) continue;
+                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+            }
+            return b;
+        })(window.location.search.substr(1).split('&'))
+    })(jQuery);
     return Class({
         constructor: function () {
+            console.log($.QueryString["quality"]);
+            if ($.QueryString["quality"] == "low") {
+                this.antialias = false;
+                this.shadowMapEnabled = false;
+                this.shadowMapSoft = false;
+                this.castShadow = false;
+            } else {
+                this.antialias = true;
+                this.shadowMapEnabled = true;
+                this.shadowMapSoft = true;
+                this.castShadow = true;
+            }
             this.setupRenderer();
             this.setupScene();
             this.attachToDOM();
@@ -16,11 +40,11 @@ define(['jquery',
             // Create the renderer and make it look pretty.
 
             this.renderer = new THREE.WebGLRenderer({
-                antialias: true
+                antialias: this.antialias
             });
             this.renderer.setSize(constants.WIDTH, constants.HEIGHT);
-            this.renderer.shadowMapEnabled = true;
-            this.renderer.shadowMapSoft = true;
+            this.renderer.shadowMapEnabled = this.shadowMapEnabled;
+            this.renderer.shadowMapSoft = this.shadowMapSoft;
             this.stats = new Stats();
             this.stats.setMode(0); // 0: fps, 1: ms
             this.stats.domElement.style.position = 'absolute';
@@ -44,7 +68,7 @@ define(['jquery',
             // Create a light and all the shadow effects we need. Individual lights can be added later.
             this.light = new THREE.DirectionalLight(0xFFFFFF, 1);
             this.light.position.set(200, 200, 800);
-            this.light.castShadow = true;
+            this.light.castShadow = this.castShadow;
             this.light.shadowMapWidth = 1024;
             this.light.shadowMapHeight = 1024;
 

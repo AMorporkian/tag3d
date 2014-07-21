@@ -62,10 +62,11 @@ define([
                     this.changeLevel("smirk")
                 } else if (this.keyboard.pressed("5")) {
                     this.changeLevel("blastoff")
+                } else if (this.keyboard.pressed("6")) {
+                    this.changeLevel("boombox")
                 }
             },
             run: function (dontDraw) {
-                console.log(this.running);
                 if (!this.running) {
                     console.log("Run loop started.");
                     this.running = true;
