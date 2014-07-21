@@ -32,6 +32,10 @@ define(['game/renderable', 'game/entities/static', 'game/entities/floor'], funct
                         case 5:
                             tile = new Static.Speedpad(i * 40, -j * 40, this.world, this.physicsWorld);
                             break;
+                        case 6.1:
+                            tile = new Static.Powerup(i * 40, -j * 40, this.world, this.physicsWorld);
+                            updateable = true;
+                            break;
                         case 6.2:
                             tile = new Static.Powerup(i * 40, -j * 40, this.world, this.physicsWorld);
                             updateable = true;

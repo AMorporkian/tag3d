@@ -14,6 +14,7 @@ define(['jquery',
         },
         setupRenderer: function () {
             // Create the renderer and make it look pretty.
+
             this.renderer = new THREE.WebGLRenderer({
                 antialias: true
             });
@@ -65,11 +66,18 @@ define(['jquery',
             var $container = $('#container');
             $container.append(this.renderer.domElement);
         },
+        detachFromDOM: function () {
+            $('#container').children(this.renderer.domElement).remove();
+        },
         drawLoop: function () {
-            this.stats.begin();
-            requestAnimationFrame(this.drawLoop.bind(this));
-            this.renderer.render(this.scene, this.activeCamera);
-            this.stats.end();
+            if (!this.killed) {
+                this.stats.begin();
+                requestAnimationFrame(this.drawLoop.bind(this));
+                this.renderer.render(this.scene, this.activeCamera);
+                this.stats.end();
+            } else {
+                console.log("drawLoop killed.")
+            }
         }
     });
 });

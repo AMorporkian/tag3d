@@ -19,6 +19,6 @@ define(['three'], function (THREE) {
             }.bind(this));
         }
     };
-    geometries.load()
+    geometries.load();
     return geometries;
 });
