@@ -4,7 +4,9 @@ require.config({
 		box2d: 'lib/box2d',
 		three: 'lib/three/three',
 		threex: 'lib/three/threex.keyboardstate',
-		jsface: 'lib/jsface'
+		jsface: 'lib/jsface',
+		microcache: 'lib/microcache',
+        stats: 'lib/three/stats'
 	},
 	shim: {
 		box2d: {
@@ -15,9 +17,12 @@ require.config({
 		},
 		three: {
 			exports: 'THREE'
-		}
+		},
+        stats: {
+            exports: 'Stats'
+        }
 	}
 });
 require(["game"], function(Game) {
 	Game.run();
-})
+});
