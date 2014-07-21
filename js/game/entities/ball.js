@@ -65,9 +65,9 @@ define(['game/renderable', 'threex', 'game/world', 'box2d', 'game/materials', 'g
                 this.world.camera.bottom = this.y + (constants.HEIGHT / -2);
 
                 this.world.perspectiveCamera.lookAt(new THREE.Vector3(this.x, this.y, -100));
-                this.world.perspectiveCamera.position.y = this.y - this.radius * 6;
+                this.world.perspectiveCamera.position.y = this.y - this.radius * 12;
                 this.world.perspectiveCamera.position.x = this.x;
-                this.world.perspectiveCamera.position.z = this.z + this.radius * 12;
+                this.world.perspectiveCamera.position.z = this.z + this.radius * 16;
                 this.world.camera.updateProjectionMatrix();
                 this.world.perspectiveCamera.updateProjectionMatrix();
 

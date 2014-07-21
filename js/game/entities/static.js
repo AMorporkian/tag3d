@@ -129,6 +129,7 @@ define(['three', 'game/renderable', 'game/materials', 'game/constants', 'game/st
                 this.box.position.x = this.x;
                 this.box.position.y = this.y;
                 this.box.position.z = -this.radius;
+                this.box.receiveShadow = true;
                 this.world.scene.add(this.box);
 
             }

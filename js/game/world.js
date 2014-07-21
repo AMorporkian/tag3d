@@ -37,7 +37,7 @@ define(['jquery',
 
             // Two cameras; one top-down, one that follows the ball.
             this.camera = new THREE.OrthographicCamera(constants.WIDTH / -2, constants.WIDTH / 2, constants.HEIGHT / 2, constants.HEIGHT / -2, -100, 500);
-            this.perspectiveCamera = new THREE.PerspectiveCamera(80, constants.WIDTH / constants.HEIGHT, 40, -40);
+            this.perspectiveCamera = new THREE.PerspectiveCamera(70, constants.WIDTH / constants.HEIGHT, 40, -40);
 
             this.activeCamera = this.camera;
 
